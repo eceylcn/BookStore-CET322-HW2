@@ -22,9 +22,8 @@ namespace BookStore.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+            var categories = await _context.Categories.ToListAsync();
+            return View(categories);
         }
 
         // GET: Categories/Details/5
@@ -35,7 +34,7 @@ namespace BookStore.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var category = await _context.Categories.Include(c=>c.Books).ThenInclude(b=>b.Publisher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {

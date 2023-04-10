@@ -1,0 +1,15 @@
+﻿@using BookStore.Data
+@model Book
+
+
+<div class="row" style="text-align:center">
+    <div class="card" style="width: 18rem; padding: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">En cok okunan kitap!</h6>
+            @*<p class="card-text">@Model.Publisher.Name</p>*@
+            <p class="card-text">@Model.Price TL</p>
+            <a asp-controller="Books" asp-action="Details" asp-route-id="@Model.Id" class="card-link">Buy now</a>
+        </div>
+    </div>
+</div>
